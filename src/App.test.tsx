@@ -1,9 +1,15 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { cleanup, render, screen } from "@testing-library/react";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import App from "./App";
+
+afterEach(cleanup);
+
+describe("App Component", () => {
+  it("should render the App texts", () => {
+    render(<App />);
+
+    expect(screen.getByText("Electronic Shop")).toBeTruthy();
+    expect(screen.getByText("Products")).toBeTruthy();
+    expect(screen.getByText("Cart")).toBeTruthy();
+  });
 });

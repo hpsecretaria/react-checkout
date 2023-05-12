@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+import ProductTable from "./components/ProductTable/ProductTable";
+import Cart from "./components/Cart";
+import Header from "./components/Header";
+import { Provider } from "react-redux";
+import store from "./stores";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+function App(): React.ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Header />
+        <Container component="main">
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6}>
+              <ProductTable />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Cart />
+            </Grid>
+          </Grid>
+        </Container>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
